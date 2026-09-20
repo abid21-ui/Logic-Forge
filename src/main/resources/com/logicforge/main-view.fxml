@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.logicforge.controller.MainController"
+            prefWidth="1200" prefHeight="760"
+            styleClass="app-root">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="2" styleClass="toolbar-row, compact-toolbar">
+            <Label text="LF" styleClass="toolbar-brand" />
+            <MenuButton text="File" styleClass="toolbar-menu-button">
+                <items>
+                    <MenuItem fx:id="homeButton" text="Home" onAction="#handleReturnHome" />
+                    <MenuItem fx:id="newButton" text="New Schematic" onAction="#handleNewCircuit" />
+                    <MenuItem text="New Breadboard" onAction="#handleNewBreadboard" />
+                    <MenuItem fx:id="openButton" text="Open…" onAction="#handleOpenCircuit" />
+                    <MenuItem fx:id="saveButton" text="Save" onAction="#handleSaveCircuit" />
+                    <MenuItem fx:id="exportImageButton" text="Export Design as PNG…"
+                              onAction="#handleExportDesignImage" />
+                    <MenuItem fx:id="exitButton" text="Exit" onAction="#handleExit" />
+                </items>
+            </MenuButton>
+            <MenuButton text="Edit" styleClass="toolbar-menu-button">
+                <items>
+                    <MenuItem fx:id="undoButton" text="Undo" onAction="#handleUndo" />
+                    <MenuItem fx:id="redoButton" text="Redo" onAction="#handleRedo" />
+                    <MenuItem fx:id="copyButton" text="Copy" onAction="#handleCopySelection" />
+                    <MenuItem fx:id="pasteButton" text="Paste" onAction="#handlePasteSelection" />
+                    <MenuItem fx:id="rotateButton" text="Rotate" onAction="#handleRotateSelection" />
+                    <MenuItem fx:id="deleteButton" text="Delete Selection" onAction="#handleDeleteSelected" />
+                    <MenuItem fx:id="clearButton" text="Clear Circuit" onAction="#handleClearCircuit" />
+                </items>
+            </MenuButton>
+            <MenuButton text="Insert" styleClass="toolbar-menu-button">
+                <items>
+                    <MenuItem fx:id="abstractButton" text="Create Block from Selection…"
+                              onAction="#handleCreateAbstraction" />
+                </items>
+            </MenuButton>
+            <MenuButton fx:id="viewsButton" text="Views" styleClass="toolbar-menu-button">
+                <items>
+                    <CheckMenuItem fx:id="paletteViewItem" text="Component Palette" selected="true"
+                                   onAction="#handleTogglePalette" />
+                    <CheckMenuItem fx:id="propertiesViewItem" text="Properties Panel" selected="true"
+                                   onAction="#handleToggleProperties" />
+                    <CheckMenuItem fx:id="statusBarViewItem" text="Status Bar" selected="true"
+                                   onAction="#handleToggleStatusBar" />
+                    <CheckMenuItem fx:id="gridViewItem" text="Workspace Grid" selected="true"
+                                   onAction="#handleToggleGrid" />
+                    <MenuItem fx:id="zoomOutButton" text="Zoom Out" onAction="#handleZoomOut" />
+                    <MenuItem text="Reset Zoom" onAction="#handleResetZoom" />
+                    <MenuItem fx:id="zoomInButton" text="Zoom In" onAction="#handleZoomIn" />
+                    <CheckMenuItem fx:id="lightThemeItem" text="Light Theme"
+                                   onAction="#handleToggleLightTheme" />
+                </items>
+            </MenuButton>
+            <MenuButton fx:id="demoMenuButton" text="Demos" styleClass="toolbar-menu-button">
+                <items>
+                    <MenuItem text="4-Bit Parity Tester" onAction="#handleLoadParityDemo" />
+                    <MenuItem text="4-Bit BCD Seven-Segment Display" onAction="#handleLoadSevenSegmentDemo" />
+                    <MenuItem text="4-Way MUX Playground" onAction="#handleLoadMuxPlaygroundDemo" />
+                    <MenuItem text="4-Bit Adder + MUX Workbench" onAction="#handleLoadAdderMuxDemo" />
+                    <MenuItem text="4-Bit Ring Light Chaser" onAction="#handleLoadLightChaserDemo" />
+                    <MenuItem text="Master-Slave JK Flip-Flop" onAction="#handleLoadMasterSlaveJkDemo" />
+                    <MenuItem text="4-Bit MUX Combination Lock" onAction="#handleLoadMuxLockboxDemo" />
+                    <MenuItem text="4-Bit Two’s-Complement Subtractor" onAction="#handleLoadTwosComplementSubtractorDemo" />
+                </items>
+            </MenuButton>
+            <Label text="SCHEMATIC" styleClass="workspace-mode-badge" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Label fx:id="zoomLabel" text="100%" styleClass="zoom-label" />
+            <ToggleButton fx:id="runButton" text="Play" onAction="#handleRunToggle"
+                          styleClass="run-button" />
+        </HBox>
+    </top>
+
+    <left>
+        <ScrollPane fx:id="componentPalettePanel"
+                    fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED"
+                    minWidth="270" prefWidth="286" maxWidth="320"
+                    styleClass="panel-scroll, palette-scroll">
+            <content>
+                <VBox minWidth="250" spacing="9" styleClass="side-panel, palette-panel">
+                    <Label text="COMPONENT PALETTE" styleClass="panel-heading" />
+                    <Label text="Pause to place or wire components" styleClass="panel-help" />
+                    <TextField fx:id="paletteSearchField" promptText="Search components..."
+                               maxWidth="Infinity" styleClass="palette-search" />
+                    <Label fx:id="paletteNoResultsLabel" text="No matching components"
+                           visible="false" managed="false" styleClass="palette-empty" />
+
+                    <TitledPane fx:id="ioPaletteSection" text="INPUT / OUTPUT"
+                                expanded="true" collapsible="true" animated="false"
+                                maxWidth="Infinity" styleClass="palette-section">
+                        <content>
+                            <GridPane fx:id="ioPaletteGrid" hgap="8" vgap="8"
+                                      maxWidth="Infinity" styleClass="palette-grid">
+                                <columnConstraints>
+                                    <ColumnConstraints minWidth="0" prefWidth="1" hgrow="ALWAYS" fillWidth="true" />
+                                    <ColumnConstraints minWidth="0" prefWidth="1" hgrow="ALWAYS" fillWidth="true" />
+                                </columnConstraints>
+                            </GridPane>
+                        </content>
+                    </TitledPane>
+
+                    <TitledPane fx:id="gatePaletteSection" text="LOGIC GATES"
+                                expanded="true" collapsible="true" animated="false"
+                                maxWidth="Infinity" styleClass="palette-section">
+                        <content>
+                            <GridPane fx:id="gatePaletteGrid" hgap="8" vgap="8"
+                                      maxWidth="Infinity" styleClass="palette-grid">
+                                <columnConstraints>
+                                    <ColumnConstraints minWidth="0" prefWidth="1" hgrow="ALWAYS" fillWidth="true" />
+                                    <ColumnConstraints minWidth="0" prefWidth="1" hgrow="ALWAYS" fillWidth="true" />
+                                </columnConstraints>
+                            </GridPane>
+                        </content>
+                    </TitledPane>
+
+                    <TitledPane fx:id="combinationalPaletteSection" text="COMBINATIONAL BLOCKS"
+                                expanded="true" collapsible="true" animated="false"
+                                maxWidth="Infinity" styleClass="palette-section">
+                        <content>
+                            <GridPane fx:id="combinationalPaletteGrid" hgap="8" vgap="8"
+                                      maxWidth="Infinity" styleClass="palette-grid">
+                                <columnConstraints>
+                                    <ColumnConstraints minWidth="0" prefWidth="1" hgrow="ALWAYS" fillWidth="true" />
+                                    <ColumnConstraints minWidth="0" prefWidth="1" hgrow="ALWAYS" fillWidth="true" />
+                                </columnConstraints>
+                            </GridPane>
+                        </content>
+                    </TitledPane>
+
+                    <TitledPane fx:id="sequentialPaletteSection" text="SEQUENTIAL LOGIC"
+                                expanded="true" collapsible="true" animated="false"
+                                maxWidth="Infinity" styleClass="palette-section">
+                        <content>
+                            <GridPane fx:id="sequentialPaletteGrid" hgap="8" vgap="8"
+                                      maxWidth="Infinity" styleClass="palette-grid">
+                                <columnConstraints>
+                                    <ColumnConstraints minWidth="0" prefWidth="1" hgrow="ALWAYS" fillWidth="true" />
+                                    <ColumnConstraints minWidth="0" prefWidth="1" hgrow="ALWAYS" fillWidth="true" />
+                                </columnConstraints>
+                            </GridPane>
+                        </content>
+                    </TitledPane>
+
+                    <TitledPane fx:id="customPaletteSection" text="CUSTOM COMPONENTS"
+                                expanded="true" collapsible="true" animated="false"
+                                visible="false" managed="false"
+                                maxWidth="Infinity" styleClass="palette-section, custom-palette-section">
+                        <content>
+                            <GridPane fx:id="customPaletteGrid" hgap="8" vgap="8"
+                                      maxWidth="Infinity" styleClass="palette-grid">
+                                <columnConstraints>
+                                    <ColumnConstraints minWidth="0" prefWidth="1" hgrow="ALWAYS" fillWidth="true" />
+                                    <ColumnConstraints minWidth="0" prefWidth="1" hgrow="ALWAYS" fillWidth="true" />
+                                </columnConstraints>
+                            </GridPane>
+                        </content>
+                    </TitledPane>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </left>
+
+    <center>
+        <StackPane styleClass="workspace-shell">
+            <ScrollPane fx:id="workspaceScroll" pannable="true"
+                        fitToWidth="false" fitToHeight="false"
+                        hbarPolicy="AS_NEEDED" vbarPolicy="AS_NEEDED"
+                        styleClass="workspace-scroll">
+                <content>
+                    <Pane fx:id="zoomContainer" prefWidth="10000" prefHeight="7000">
+                        <StackPane fx:id="workspaceStack"
+                                   prefWidth="10000" prefHeight="7000"
+                                   alignment="TOP_LEFT" styleClass="workspace-stack">
+                            <Pane fx:id="gridLayer" />
+                            <Pane fx:id="wireLayer" />
+                            <Pane fx:id="componentLayer" />
+                        </StackPane>
+                    </Pane>
+                </content>
+            </ScrollPane>
+        </StackPane>
+    </center>
+
+    <right>
+        <ScrollPane fx:id="propertiesPanel"
+                    fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED"
+                    minWidth="245" prefWidth="275" maxWidth="310"
+                    styleClass="panel-scroll, properties-scroll">
+            <content>
+                <VBox minWidth="230" spacing="10" styleClass="side-panel, properties-panel">
+                    <Label text="PROPERTIES" styleClass="panel-heading" />
+
+                    <VBox fx:id="singleSelectionSection" spacing="8" visible="false" managed="false">
+                        <VBox spacing="5" styleClass="property-card">
+                            <Label text="Selected Item" styleClass="property-label" />
+                            <Label fx:id="selectedNameLabel" text="No selection" wrapText="true"
+                                   styleClass="property-value-large" />
+                            <Label fx:id="selectedDescriptionLabel"
+                                   text="Select a component to see its behavior."
+                                   wrapText="true" styleClass="property-description" />
+                        </VBox>
+
+                        <VBox spacing="7" styleClass="property-list">
+                            <HBox spacing="8">
+                                <Label text="Label" styleClass="property-label" HBox.hgrow="ALWAYS" />
+                                <Label fx:id="selectedCustomLabelLabel" text="—" wrapText="true" styleClass="property-value" />
+                            </HBox>
+                            <HBox spacing="8">
+                                <Label text="Item ID" styleClass="property-label" HBox.hgrow="ALWAYS" />
+                                <Label fx:id="selectedIdLabel" text="—" styleClass="property-value" />
+                            </HBox>
+                            <HBox spacing="8">
+                                <Label text="Logic State" styleClass="property-label" HBox.hgrow="ALWAYS" />
+                                <Label fx:id="selectedStateLabel" text="—" wrapText="true" styleClass="property-value" />
+                            </HBox>
+                            <VBox spacing="2">
+                                <Label text="Configuration" styleClass="property-label" />
+                                <Label fx:id="selectedConfigLabel" text="—" wrapText="true" styleClass="property-value, property-value-block" />
+                            </VBox>
+                            <HBox spacing="8">
+                                <Label text="Position / Route" styleClass="property-label" HBox.hgrow="ALWAYS" />
+                                <Label fx:id="selectedPositionLabel" text="—" styleClass="property-value" />
+                            </HBox>
+                            <VBox spacing="2">
+                                <Label text="Inputs / Source" styleClass="property-label" />
+                                <Label fx:id="selectedInputsLabel" text="—" wrapText="true" styleClass="property-value, property-value-block" />
+                            </VBox>
+                            <VBox spacing="2">
+                                <Label text="Outputs / Target" styleClass="property-label" />
+                                <Label fx:id="selectedOutputsLabel" text="—" wrapText="true" styleClass="property-value, property-value-block" />
+                            </VBox>
+                        </VBox>
+                    </VBox>
+
+                    <VBox fx:id="multiSelectionSection" spacing="7" visible="false" managed="false">
+                        <Label fx:id="multiSelectionHeading" text="MULTIPLE ITEMS" styleClass="section-label" />
+                        <VBox fx:id="multiSelectionList" spacing="7" />
+                    </VBox>
+
+                    <VBox fx:id="overviewSection" spacing="9">
+                        <VBox spacing="4" styleClass="property-card">
+                            <Label text="Whole Circuit" styleClass="property-value-large" />
+                            <Label text="No individual item is selected. Circuit-wide information is shown below."
+                                   wrapText="true" styleClass="property-description" />
+                        </VBox>
+
+                        <Separator />
+                        <Label text="CIRCUIT OVERVIEW" styleClass="section-label" />
+                        <HBox spacing="8">
+                            <VBox alignment="CENTER" spacing="3" styleClass="metric-card" HBox.hgrow="ALWAYS">
+                                <Label fx:id="componentCountLabel" text="0" styleClass="metric-number" />
+                                <Label text="COMPONENTS" styleClass="metric-caption" />
+                            </VBox>
+                            <VBox alignment="CENTER" spacing="3" styleClass="metric-card" HBox.hgrow="ALWAYS">
+                                <Label fx:id="wireCountLabel" text="0" styleClass="metric-number" />
+                                <Label text="WIRES" styleClass="metric-caption" />
+                            </VBox>
+                        </HBox>
+
+                        <VBox spacing="7" styleClass="simulation-card">
+                            <Label text="SIMULATION ENGINE" styleClass="section-label" />
+                            <Label fx:id="simulationStatusLabel" text="PAUSED"
+                                   styleClass="simulation-status, status-paused" />
+                            <Label text="Paused mode allows editing and start-state setup. Play mode runs clocks, flip-flops, and gate-level feedback; unstable zero-delay loops are reported."
+                                   wrapText="true" styleClass="panel-help" />
+                        </VBox>
+
+                        <Label text="Cyan wire = TRUE / 1" styleClass="legend-true" />
+                        <Label text="Gray wire = FALSE / 0" styleClass="legend-false" />
+                    </VBox>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </right>
+
+    <bottom>
+        <HBox fx:id="statusBar" alignment="CENTER_LEFT" spacing="10" styleClass="status-bar">
+            <Label text="●" styleClass="status-dot" />
+            <Label fx:id="statusMessageLabel" text="Paused" HBox.hgrow="ALWAYS" styleClass="status-text" />
+            <Label fx:id="cursorPositionLabel" text="X 10000  Y 7000  •  Grid 500, 350"
+                   styleClass="status-coordinates" />
+        </HBox>
+    </bottom>
+</BorderPane>

@@ -1,0 +1,655 @@
+/* LogicForge light-theme overrides. The dark stylesheet remains the base. */
+
+.app-root {
+    -fx-background-color: #e8edf3;
+}
+
+.toolbar-row {
+    -fx-background-color: #f6f8fb;
+    -fx-border-color: transparent transparent #c7d0da transparent;
+}
+
+.toolbar-row .separator .line {
+    -fx-border-color: #c5ced8;
+}
+
+.toolbar-button {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #c3ccd6;
+    -fx-text-fill: #263544;
+}
+
+.toolbar-button:hover,
+.menu-button.toolbar-button:hover {
+    -fx-background-color: #eaf4f7;
+    -fx-border-color: #6f9fad;
+}
+
+.abstract-button {
+    -fx-border-color: #7c3aed;
+    -fx-text-fill: #5b21b6;
+}
+
+.abstract-button:hover {
+    -fx-background-color: #ede9fe;
+    -fx-border-color: #7c3aed;
+}
+
+.home-button {
+    -fx-background-color: #e0f3f6;
+    -fx-border-color: #69aebc;
+    -fx-text-fill: #155366;
+}
+
+.menu-button.toolbar-button > .label {
+    -fx-text-fill: #263544;
+}
+
+.menu-button.toolbar-button > .arrow-button > .arrow {
+    -fx-background-color: #506270;
+}
+
+.context-menu {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #bac5d0;
+}
+
+.dialog-pane {
+    -fx-background-color: #f6f8fb;
+}
+
+.dialog-pane > .header-panel {
+    -fx-background-color: #e8edf2;
+}
+
+.dialog-pane .label,
+.block-creation-dialog .label {
+    -fx-text-fill: #263544;
+}
+
+.dialog-pane .text-field,
+.dialog-pane .text-area {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #bdc8d2;
+    -fx-text-fill: #24323f;
+    -fx-prompt-text-fill: #82909c;
+}
+
+.dialog-pane .text-area .content {
+    -fx-background-color: #ffffff;
+}
+
+.menu-item .label {
+    -fx-text-fill: #263544;
+}
+
+.menu-item:focused {
+    -fx-background-color: #dff3f6;
+}
+
+.zoom-label {
+    -fx-text-fill: #556978;
+}
+
+.demo-button {
+    -fx-background-color: #e2f2f6;
+    -fx-border-color: #77aebc;
+    -fx-text-fill: #154f61;
+}
+
+.demo-button:hover {
+    -fx-background-color: #cfebf0;
+}
+
+.run-button {
+    -fx-background-color: #fff1c8;
+    -fx-border-color: #c99c29;
+    -fx-text-fill: #60490c;
+}
+
+.run-button:selected {
+    -fx-background-color: #c9f2e8;
+    -fx-border-color: #2f9f87;
+    -fx-text-fill: #135d4e;
+}
+
+.panel-scroll,
+.panel-scroll > .viewport,
+.panel-scroll > .corner,
+.side-panel {
+    -fx-background-color: #f4f7fa;
+}
+
+.panel-scroll .scroll-bar:vertical,
+.workspace-scroll .scroll-bar:horizontal,
+.workspace-scroll .scroll-bar:vertical {
+    -fx-background-color: #e3e8ee;
+}
+
+.panel-scroll .scroll-bar:vertical .thumb,
+.workspace-scroll .thumb {
+    -fx-background-color: #aebac6;
+}
+
+.palette-panel {
+    -fx-border-color: transparent #c8d1da transparent transparent;
+}
+
+.properties-panel {
+    -fx-border-color: transparent transparent transparent #c8d1da;
+}
+
+.panel-heading {
+    -fx-text-fill: #1f2d3a;
+}
+
+.panel-help,
+.palette-empty {
+    -fx-text-fill: #657786;
+}
+
+.section-label,
+.palette-section {
+    -fx-text-fill: #087f91;
+}
+
+.palette-search {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #bdc8d2;
+    -fx-text-fill: #24323f;
+    -fx-prompt-text-fill: #82909c;
+}
+
+.palette-search:focused {
+    -fx-border-color: #1597a9;
+    -fx-effect: dropshadow(gaussian, rgba(21,151,169,0.16), 8, 0.2, 0, 0);
+}
+
+.palette-section > .title {
+    -fx-background-color: #e8edf2;
+    -fx-border-color: #c4ced7;
+}
+
+.palette-section > .title:hover {
+    -fx-background-color: #dce8ed;
+    -fx-border-color: #82aeb9;
+}
+
+.palette-section > .title > .text {
+    -fx-fill: #087f91;
+}
+
+.palette-section > .title > .arrow-button > .arrow {
+    -fx-background-color: #2d7783;
+}
+
+.palette-item {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #c8d1da;
+}
+
+.palette-item:hover {
+    -fx-background-color: #edf9fb;
+    -fx-border-color: #1597a9;
+    -fx-effect: dropshadow(gaussian, rgba(21,151,169,0.18), 9, 0.18, 0, 1);
+}
+
+.palette-title {
+    -fx-text-fill: #273746;
+}
+
+.workspace-shell,
+.workspace-scroll,
+.workspace-scroll > .viewport,
+.workspace-stack {
+    -fx-background-color: #f8fafc;
+}
+
+.grid-line-major {
+    -fx-stroke: #c4d0dc;
+    -fx-stroke-width: 1;
+}
+
+.grid-line-minor {
+    -fx-stroke: #e0e6ec;
+    -fx-stroke-width: 0.55;
+}
+
+.gate-shape,
+.block-body,
+.mux-body,
+.clock-body {
+    -fx-fill: #f8fafc;
+    -fx-stroke: #344b60;
+}
+
+.xor-extra-curve,
+.clock-waveform,
+.clock-edge-marker,
+.power-symbol-line {
+    -fx-fill: transparent;
+    -fx-stroke: #344b60;
+}
+
+.power-symbol-fill {
+    -fx-fill: #344b60;
+    -fx-stroke: #344b60;
+}
+
+.power-state-text {
+    -fx-text-fill: #475d70;
+}
+
+.terminal-line {
+    -fx-stroke: #637b8f;
+}
+
+.pin-handle {
+    -fx-fill: #f8fafc;
+    -fx-stroke: #62798c;
+}
+
+.junction-dot {
+    -fx-fill: #f8fafc;
+    -fx-stroke: #526b80;
+}
+
+.block-creation-preview {
+    -fx-background-color: rgba(239, 246, 251, 0.92);
+    -fx-border-color: rgba(0, 135, 155, 0.35);
+}
+
+.block-preview-name,
+.block-dialog-section-title {
+    -fx-text-fill: #253a4d;
+}
+
+.block-dialog-validation {
+    -fx-text-fill: #b42318;
+}
+
+.block-dialog-validation:active {
+    -fx-text-fill: #087a55;
+}
+
+.circuit-node:hover .gate-shape,
+.circuit-node:hover .terminal-line {
+    -fx-stroke: #172c3c;
+}
+
+.block-title {
+    -fx-text-fill: #253a4d;
+}
+
+.custom-component-body {
+    -fx-stroke: #7c3aed;
+    -fx-stroke-width: 3;
+    -fx-fill: #f5f3ff;
+}
+
+.custom-component-title {
+    -fx-text-fill: #5b21b6;
+}
+
+.custom-palette-item {
+    -fx-border-color: rgba(124, 58, 237, 0.45);
+}
+
+.custom-palette-description {
+    -fx-text-fill: #5d7182;
+}
+
+.pin-name {
+    -fx-text-fill: #506779;
+}
+
+.component-label {
+    -fx-text-fill: #1f5268;
+    -fx-effect: dropshadow(gaussian, rgba(255,255,255,0.9), 3, 0.4, 0, 1);
+}
+
+.logic-state-display {
+    -fx-fill: #edf2f6;
+}
+
+.logic-state-text {
+    -fx-text-fill: #5a6d7d;
+}
+
+.seven-segment-body {
+    -fx-fill: #e9eef2;
+}
+
+.seven-segment-well {
+    -fx-fill: #28323a;
+    -fx-stroke: #697986;
+}
+
+.signal-wire {
+    -fx-stroke: #687987;
+    -fx-effect: dropshadow(gaussian, rgba(255,255,255,0.72), 3, 0.2, 0, 1);
+}
+
+.signal-wire:active {
+    -fx-stroke: #00a9bd;
+    -fx-effect: dropshadow(gaussian, rgba(0,169,189,0.55), 9, 0.35, 0, 0);
+}
+
+.signal-wire:selected,
+.signal-wire:active:selected {
+    -fx-stroke: #d49300;
+    -fx-effect: dropshadow(gaussian, rgba(212,147,0,0.45), 9, 0.32, 0, 0);
+}
+
+.property-card,
+.property-list,
+.simulation-card,
+.multi-property-card,
+.metric-card {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cbd4dd;
+}
+
+.property-label,
+.multi-property-meta,
+.metric-caption {
+    -fx-text-fill: #637585;
+}
+
+.property-value,
+.property-value-large,
+.multi-property-title {
+    -fx-text-fill: #263746;
+}
+
+.property-description,
+.multi-property-value,
+.multi-property-details {
+    -fx-text-fill: #526879;
+}
+
+.metric-number {
+    -fx-text-fill: #078fa1;
+}
+
+.legend-true {
+    -fx-text-fill: #009caf;
+}
+
+.legend-false {
+    -fx-text-fill: #687987;
+}
+
+.status-bar {
+    -fx-background-color: #edf1f5;
+    -fx-border-color: #c5ced7 transparent transparent transparent;
+}
+
+.status-text {
+    -fx-text-fill: #506575;
+}
+
+.status-version {
+    -fx-text-fill: #7b8b98;
+}
+
+.status-coordinates {
+    -fx-text-fill: #17677a;
+}
+
+.ic-body {
+    -fx-fill: #28323d;
+    -fx-stroke: #172c3c;
+}
+
+.ic-notch {
+    -fx-fill: #f8fafc;
+    -fx-stroke: #172c3c;
+}
+
+.ic-part-number {
+    -fx-text-fill: #ffffff;
+}
+
+.ic-package-label {
+    -fx-text-fill: #c8d3dd;
+}
+
+.component-integrated_circuit:unpowered .ic-body {
+    -fx-stroke: #d9480f;
+}
+
+.palette-preview-node.component-integrated_circuit:unpowered .ic-body {
+    -fx-stroke: #172c3c;
+}
+
+.selection-marquee {
+    -fx-fill: rgba(0, 157, 178, 0.12);
+    -fx-stroke: #009db2;
+}
+
+.welcome-root {
+    -fx-background-color: linear-gradient(to bottom right, #eef4f8 0%, #f7fafc 55%, #e8f3f5 100%);
+}
+
+.welcome-topbar,
+.welcome-footer {
+    -fx-background-color: rgba(248, 250, 252, 0.92);
+    -fx-border-color: transparent transparent #cbd6df transparent;
+}
+
+.welcome-brand,
+.welcome-title {
+    -fx-text-fill: #203342;
+}
+
+.welcome-subtitle,
+.welcome-footer-motto,
+.welcome-shortcut,
+.recent-project-hint,
+.recent-project-path,
+.recent-empty {
+    -fx-text-fill: #637787;
+}
+
+.welcome-project-panel {
+    -fx-background-color: rgba(255, 255, 255, 0.96);
+    -fx-border-color: #c7d2dc;
+    -fx-effect: dropshadow(gaussian, rgba(53,74,91,0.18), 24, 0.22, 0, 8);
+}
+
+.welcome-secondary-button,
+.recent-project-row {
+    -fx-background-color: #eef3f7;
+    -fx-border-color: #c4d0da;
+    -fx-text-fill: #2b3e4e;
+}
+
+.recent-project-name {
+    -fx-text-fill: #263a4a;
+}
+
+/* Light variant of the graphite breadboard; rails remain conventionally red/blue. */
+.toolbar-menu-button > .label {
+    -fx-text-fill: #334b5e;
+}
+
+.toolbar-menu-button > .arrow-button > .arrow {
+    -fx-background-color: #607789;
+}
+
+.toolbar-menu-button:hover,
+.toolbar-menu-button:showing {
+    -fx-background-color: #dce8ef;
+}
+
+.breadboard-workspace-shell,
+.breadboard-scroll,
+.breadboard-scroll > .viewport,
+.breadboard-canvas {
+    -fx-background-color: #e7eef3;
+}
+
+.breadboard-shell {
+    -fx-fill: linear-gradient(to right, #d8e1e7, #f6f8fa 50%, #d8e1e7);
+    -fx-stroke: #93a7b6;
+    -fx-effect: dropshadow(gaussian, rgba(45, 64, 79, 0.24), 18, 0.24, 0, 6);
+}
+
+.breadboard-center-trench {
+    -fx-fill: #c8d3dc;
+    -fx-stroke: #94a8b7;
+}
+
+.breadboard-hole {
+    -fx-fill: #354653;
+    -fx-stroke: #738897;
+}
+
+.breadboard-hole:hover {
+    -fx-fill: #195a6b;
+    -fx-stroke: #00a8bc;
+    -fx-effect: dropshadow(gaussian, rgba(0, 168, 188, 0.42), 7, 0.28, 0, 0);
+}
+
+.breadboard-hole.occupied {
+    -fx-fill: #00afc2;
+    -fx-stroke: #d3fcff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 175, 194, 0.64), 9, 0.36, 0, 0);
+}
+
+.breadboard-hole.signal-high {
+    -fx-stroke: #00a9bd;
+    -fx-effect: dropshadow(gaussian, rgba(0, 169, 189, 0.48), 7, 0.30, 0, 0);
+}
+
+.breadboard-ic-body {
+    -fx-fill: linear-gradient(to right, #172431, #2d3b48 48%, #172431);
+    -fx-stroke: #526879;
+}
+
+.breadboard-ic-notch {
+    -fx-fill: #f0f4f7;
+    -fx-stroke: #526879;
+}
+
+.breadboard-ic-pin {
+    -fx-fill: #00afc2;
+    -fx-stroke: #d3fcff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 175, 194, 0.54), 7, 0.32, 0, 0);
+}
+
+.breadboard-control-panel {
+    -fx-fill: linear-gradient(to bottom, #f6f9fb, #dce6ed);
+    -fx-stroke: #9eb1bf;
+}
+
+.breadboard-control-title { -fx-text-fill: #3c5364; }
+.breadboard-control-number { -fx-text-fill: #647b8c; }
+
+.breadboard-input-switch {
+    -fx-background-color: #e4ebf0;
+    -fx-border-color: #8da2b1;
+    -fx-text-fill: #526a7b;
+}
+
+.breadboard-input-switch:selected {
+    -fx-background-color: #0a9caf;
+    -fx-border-color: #006f7e;
+    -fx-text-fill: white;
+}
+
+.breadboard-control-lead {
+    -fx-stroke: #607786;
+}
+
+.breadboard-control-lead.signal-high,
+.breadboard-control-lead.occupied {
+    -fx-stroke: #00afc2;
+    -fx-effect: dropshadow(gaussian, rgba(0, 175, 194, 0.58), 8, 0.34, 0, 0);
+}
+
+.breadboard-output-bulb {
+    -fx-fill: #7b8f9d;
+    -fx-stroke: #566d7d;
+}
+
+.breadboard-output-bulb.on {
+    -fx-fill: #00c9dc;
+    -fx-stroke: #e0fdff;
+}
+
+/* Preserve per-jumper endpoint colours after the light-theme occupied styles. */
+.breadboard-hole.wire-color-yellow,
+.breadboard-control-lead.wire-color-yellow { -fx-fill: #b28d00; -fx-stroke: #b28d00; }
+.breadboard-output-bulb.wire-color-yellow { -fx-stroke: #b28d00; }
+.breadboard-hole.wire-color-cyan,
+.breadboard-control-lead.wire-color-cyan { -fx-fill: #008fa3; -fx-stroke: #008fa3; }
+.breadboard-output-bulb.wire-color-cyan { -fx-stroke: #008fa3; }
+.breadboard-hole.wire-color-magenta,
+.breadboard-control-lead.wire-color-magenta { -fx-fill: #9848c5; -fx-stroke: #9848c5; }
+.breadboard-output-bulb.wire-color-magenta { -fx-stroke: #9848c5; }
+.breadboard-hole.wire-color-orange,
+.breadboard-control-lead.wire-color-orange { -fx-fill: #c85b18; -fx-stroke: #c85b18; }
+.breadboard-output-bulb.wire-color-orange { -fx-stroke: #c85b18; }
+.breadboard-hole.wire-color-green,
+.breadboard-control-lead.wire-color-green { -fx-fill: #18895a; -fx-stroke: #18895a; }
+.breadboard-output-bulb.wire-color-green { -fx-stroke: #18895a; }
+.breadboard-hole.wire-color-red,
+.breadboard-control-lead.wire-color-red { -fx-fill: #d83248; -fx-stroke: #d83248; }
+.breadboard-output-bulb.wire-color-red { -fx-stroke: #d83248; }
+.breadboard-hole.wire-color-blue,
+.breadboard-control-lead.wire-color-blue { -fx-fill: #2d70c9; -fx-stroke: #2d70c9; }
+.breadboard-output-bulb.wire-color-blue { -fx-stroke: #2d70c9; }
+.breadboard-hole.wire-color-purple,
+.breadboard-control-lead.wire-color-purple { -fx-fill: #7455d8; -fx-stroke: #7455d8; }
+.breadboard-output-bulb.wire-color-purple { -fx-stroke: #7455d8; }
+.breadboard-hole.wire-color-teal,
+.breadboard-control-lead.wire-color-teal { -fx-fill: #14856c; -fx-stroke: #14856c; }
+.breadboard-output-bulb.wire-color-teal { -fx-stroke: #14856c; }
+.breadboard-hole.wire-color-white,
+.breadboard-control-lead.wire-color-white { -fx-fill: #6b7c88; -fx-stroke: #6b7c88; }
+.breadboard-output-bulb.wire-color-white { -fx-stroke: #6b7c88; }
+
+.breadboard-hole.wire-color-yellow,
+.breadboard-control-lead.wire-color-yellow { -fx-effect: dropshadow(gaussian, #b28d00, 9, 0.42, 0, 0); }
+.breadboard-hole.wire-color-cyan,
+.breadboard-control-lead.wire-color-cyan { -fx-effect: dropshadow(gaussian, #008fa3, 9, 0.42, 0, 0); }
+.breadboard-hole.wire-color-magenta,
+.breadboard-control-lead.wire-color-magenta { -fx-effect: dropshadow(gaussian, #9848c5, 9, 0.42, 0, 0); }
+.breadboard-hole.wire-color-orange,
+.breadboard-control-lead.wire-color-orange { -fx-effect: dropshadow(gaussian, #c85b18, 9, 0.42, 0, 0); }
+.breadboard-hole.wire-color-green,
+.breadboard-control-lead.wire-color-green { -fx-effect: dropshadow(gaussian, #18895a, 9, 0.42, 0, 0); }
+.breadboard-hole.wire-color-red,
+.breadboard-control-lead.wire-color-red { -fx-effect: dropshadow(gaussian, #d83248, 9, 0.42, 0, 0); }
+.breadboard-hole.wire-color-blue,
+.breadboard-control-lead.wire-color-blue { -fx-effect: dropshadow(gaussian, #2d70c9, 9, 0.42, 0, 0); }
+.breadboard-hole.wire-color-purple,
+.breadboard-control-lead.wire-color-purple { -fx-effect: dropshadow(gaussian, #7455d8, 9, 0.42, 0, 0); }
+.breadboard-hole.wire-color-teal,
+.breadboard-control-lead.wire-color-teal { -fx-effect: dropshadow(gaussian, #14856c, 9, 0.42, 0, 0); }
+.breadboard-hole.wire-color-white,
+.breadboard-control-lead.wire-color-white { -fx-effect: dropshadow(gaussian, #6b7c88, 9, 0.42, 0, 0); }
+
+.breadboard-palette-card {
+    -fx-background-color: #eef3f7;
+    -fx-border-color: #c4d0da;
+}
+
+.breadboard-palette-card:hover {
+    -fx-background-color: #e0edf3;
+    -fx-border-color: #34a7b8;
+}
+
+.breadboard-palette-part {
+    -fx-text-fill: #078fa1;
+}
+
+.breadboard-palette-name {
+    -fx-text-fill: #334a5a;
+}
+
+.breadboard-palette-package {
+    -fx-text-fill: #637888;
+}

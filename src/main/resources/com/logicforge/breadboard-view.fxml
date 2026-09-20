@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.logicforge.controller.BreadboardController"
+            prefWidth="1200" prefHeight="760"
+            styleClass="app-root, breadboard-root">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="2" styleClass="toolbar-row, compact-toolbar">
+            <Label text="LF" styleClass="toolbar-brand" />
+            <MenuButton text="File" styleClass="toolbar-menu-button">
+                <items>
+                    <MenuItem text="Home" onAction="#handleHome" />
+                    <MenuItem text="New Breadboard" onAction="#handleNewBreadboard" />
+                    <MenuItem text="New Schematic" onAction="#handleNewSchematic" />
+                    <MenuItem text="Open…" onAction="#handleOpen" />
+                    <MenuItem text="Save" onAction="#handleSave" />
+                    <MenuItem text="Export Breadboard as PNG…" onAction="#handleExportPng" />
+                    <MenuItem text="Exit" onAction="#handleExit" />
+                </items>
+            </MenuButton>
+            <MenuButton text="Edit" styleClass="toolbar-menu-button">
+                <items>
+                    <MenuItem fx:id="undoItem" text="Undo" onAction="#handleUndo" disable="true" />
+                    <MenuItem fx:id="redoItem" text="Redo" onAction="#handleRedo" disable="true" />
+                    <MenuItem fx:id="copyItem" text="Copy Selected IC" onAction="#handleCopy" disable="true" />
+                    <MenuItem fx:id="pasteItem" text="Paste IC" onAction="#handlePaste" disable="true" />
+                    <MenuItem fx:id="deleteItem" text="Delete Selection"
+                              onAction="#handleDeleteSelected" disable="true" />
+                    <MenuItem text="Clear Breadboard" onAction="#handleClearBoard" />
+                </items>
+            </MenuButton>
+            <MenuButton text="Board Size" styleClass="toolbar-menu-button">
+                <items>
+                    <MenuItem text="Mini • 170 tie points" onAction="#handleMiniBoard" />
+                    <MenuItem text="Half • 300 tie points" onAction="#handleHalfBoard" />
+                    <MenuItem text="Full • 630 tie points" onAction="#handleFullBoard" />
+                    <MenuItem text="Double • two full boards" onAction="#handleDoubleBoard" />
+                    <MenuItem text="Triple • three full boards" onAction="#handleTripleBoard" />
+                    <MenuItem text="Quadruple • four full boards" onAction="#handleQuadrupleBoard" />
+                    <MenuItem text="Quintuple • five full boards" onAction="#handleQuintupleBoard" />
+                </items>
+            </MenuButton>
+            <MenuButton text="View" styleClass="toolbar-menu-button">
+                <items>
+                    <MenuItem text="Zoom Out" onAction="#handleZoomOut" />
+                    <MenuItem text="Reset Zoom" onAction="#handleResetZoom" />
+                    <MenuItem text="Zoom In" onAction="#handleZoomIn" />
+                    <CheckMenuItem fx:id="lightThemeItem" text="Light Theme"
+                                   onAction="#handleToggleLightTheme" />
+                </items>
+            </MenuButton>
+            <MenuButton text="Demos" styleClass="toolbar-menu-button">
+                <items>
+                    <MenuItem text="1-Bit Full Adder (Basic Gates)" onAction="#handleLoadFullAdderDemo" />
+                    <MenuItem text="Two’s-Complement Subtractor (Full Adder)" onAction="#handleLoadTwosComplementDemo" />
+                </items>
+            </MenuButton>
+            <Label text="BREADBOARD" styleClass="workspace-mode-badge, breadboard-mode-badge" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Label fx:id="zoomLabel" text="100%" styleClass="status-version" />
+            <Label fx:id="diagnosticLabel" text="All nets stable"
+                   styleClass="breadboard-diagnostic, stable" />
+        </HBox>
+    </top>
+
+    <left>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED"
+                    minWidth="260" prefWidth="282" maxWidth="315"
+                    styleClass="panel-scroll, palette-scroll">
+            <content>
+                <VBox spacing="10" minWidth="242" styleClass="side-panel, palette-panel">
+                    <Label text="BREADBOARD ICs" styleClass="panel-heading" />
+                    <Label text="Drag a DIP package onto the centre trench. Its lead centres snap to the socket grid."
+                           wrapText="true" styleClass="panel-help" />
+                    <TextField fx:id="paletteSearchField" promptText="Search 74HC parts…"
+                               maxWidth="Infinity" styleClass="palette-search" />
+                    <VBox fx:id="icPaletteList" spacing="8" />
+                </VBox>
+            </content>
+        </ScrollPane>
+    </left>
+
+    <center>
+        <StackPane styleClass="workspace-shell, breadboard-workspace-shell">
+            <ScrollPane fx:id="boardScroll" pannable="true"
+                        fitToWidth="false" fitToHeight="false"
+                        hbarPolicy="AS_NEEDED" vbarPolicy="AS_NEEDED"
+                        styleClass="workspace-scroll, breadboard-scroll">
+                <content>
+                    <Pane fx:id="zoomContainer">
+                        <children>
+                            <Pane fx:id="boardRoot" styleClass="breadboard-canvas">
+                                <children>
+                                    <Pane fx:id="boardBackgroundLayer" mouseTransparent="true" />
+                                    <Pane fx:id="jumperLayer" pickOnBounds="false" />
+                                    <Pane fx:id="holeLayer" pickOnBounds="false" />
+                                    <Pane fx:id="controlLayer" pickOnBounds="false" />
+                                    <Pane fx:id="icLayer" pickOnBounds="false" />
+                                </children>
+                            </Pane>
+                        </children>
+                    </Pane>
+                </content>
+            </ScrollPane>
+        </StackPane>
+    </center>
+
+    <right>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED"
+                    minWidth="250" prefWidth="280" maxWidth="320"
+                    styleClass="panel-scroll, properties-scroll">
+            <content>
+                <VBox minWidth="230" spacing="10" styleClass="side-panel, properties-panel">
+                    <Label text="BREADBOARD" styleClass="panel-heading" />
+                    <VBox spacing="5" styleClass="property-card">
+                        <Label fx:id="boardSizeLabel" text="Half • 300 tie points"
+                               wrapText="true" styleClass="property-value-large" />
+                        <Label text="Socket-level simulation" styleClass="property-description" />
+                    </VBox>
+                    <HBox spacing="8">
+                        <VBox alignment="CENTER" spacing="3" styleClass="metric-card" HBox.hgrow="ALWAYS">
+                            <Label fx:id="icCountLabel" text="0" styleClass="metric-number" />
+                            <Label text="ICs" styleClass="metric-caption" />
+                        </VBox>
+                        <VBox alignment="CENTER" spacing="3" styleClass="metric-card" HBox.hgrow="ALWAYS">
+                            <Label fx:id="jumperCountLabel" text="0" styleClass="metric-number" />
+                            <Label text="JUMPERS" styleClass="metric-caption" />
+                        </VBox>
+                    </HBox>
+                    <Separator />
+                    <Label text="SELECTION" styleClass="section-label" />
+                    <Label fx:id="selectedItemLabel" text="No selection"
+                           wrapText="true" styleClass="property-value-large" />
+                    <Label fx:id="selectedDetailsLabel"
+                           text="Drag from any empty socket to another empty socket to add a jumper. Five terminal holes in each strip are internally connected."
+                           wrapText="true" styleClass="property-description" />
+                    <Separator />
+                    <Label text="HOW IT CONDUCTS" styleClass="section-label" />
+                    <Label text="• Five holes in a terminal strip share one metal contact.&#10;• Red and blue rails are visual bus guides; wire VCC/GND to power them.&#10;• A socket holds exactly one IC lead or one jumper endpoint.&#10;• Cyan means HIGH; conflicts pulse red."
+                           wrapText="true" styleClass="panel-help, breadboard-help" />
+                    <Label text="Schematic-only tools—including Create Block, gates, rotation, and CAD wire routing—are intentionally unavailable here."
+                           wrapText="true" styleClass="property-description" />
+                </VBox>
+            </content>
+        </ScrollPane>
+    </right>
+
+    <bottom>
+        <HBox alignment="CENTER_LEFT" spacing="10" styleClass="status-bar">
+            <Label text="●" styleClass="status-dot" />
+            <Label fx:id="statusMessageLabel" text="Breadboard ready • drag from an empty socket to wire"
+                   HBox.hgrow="ALWAYS" styleClass="status-text" />
+            <Label text="BREADBOARD" styleClass="status-version" />
+        </HBox>
+    </bottom>
+</BorderPane>

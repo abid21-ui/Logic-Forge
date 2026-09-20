@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.logicforge.controller.WelcomeController"
+            prefWidth="1200" prefHeight="760"
+            styleClass="welcome-root">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="12" styleClass="welcome-topbar">
+            <StackPane minWidth="42" minHeight="42" prefWidth="42" prefHeight="42"
+                       styleClass="welcome-mark-small">
+                <Label text="LF" styleClass="welcome-mark-text-small" />
+            </StackPane>
+            <VBox spacing="0">
+                <Label text="LogicForge" styleClass="welcome-brand" />
+                <Label text="VISUAL DIGITAL LOGIC SIMULATOR" styleClass="welcome-brand-caption" />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+        </HBox>
+    </top>
+
+    <center>
+        <HBox alignment="CENTER" spacing="60" styleClass="welcome-content">
+            <VBox alignment="CENTER_LEFT" spacing="18" maxWidth="520" styleClass="welcome-hero">
+                <StackPane minWidth="110" minHeight="110" prefWidth="110" prefHeight="110"
+                           styleClass="welcome-mark-large">
+                    <Label text="LF" styleClass="welcome-mark-text-large" />
+                </StackPane>
+                <Label text="Build logic.&#10;See it come alive."
+                       wrapText="true" styleClass="welcome-title" />
+                <Label text="Design, simulate, and understand digital circuits with live signals, CAD-style schematics, and a socket-level physical breadboard workspace."
+                       wrapText="true" maxWidth="490" styleClass="welcome-subtitle" />
+                <HBox spacing="8">
+                    <Label text="CAD WIRING" styleClass="welcome-chip" />
+                    <Label text="LIVE SIMULATION" styleClass="welcome-chip" />
+                    <Label text="JDK 21" styleClass="welcome-chip" />
+                </HBox>
+            </VBox>
+
+            <VBox spacing="16" minWidth="390" prefWidth="430" maxWidth="460"
+                  styleClass="welcome-project-panel">
+                <Label text="START A PROJECT" styleClass="welcome-section-kicker" />
+                <Button fx:id="newProjectButton" text="New Schematic"
+                        onAction="#handleNewProject"
+                        maxWidth="Infinity" styleClass="welcome-primary-button" />
+                <Button fx:id="newBreadboardButton" text="New Breadboard"
+                        onAction="#handleNewBreadboard"
+                        maxWidth="Infinity" styleClass="welcome-primary-button, breadboard-welcome-button" />
+                <Button fx:id="openProjectButton" text="Open .lgf Project"
+                        onAction="#handleOpenProject"
+                        maxWidth="Infinity" styleClass="welcome-secondary-button" />
+
+                <Separator />
+                <HBox alignment="CENTER_LEFT">
+                    <Label text="RECENT PROJECTS" styleClass="welcome-section-kicker" />
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Label text="Double-click to open" styleClass="recent-project-hint" />
+                </HBox>
+                <Label fx:id="recentEmptyLabel"
+                       text="No recent projects yet. Create your first circuit or open an existing .lgf file."
+                       wrapText="true" styleClass="recent-empty" />
+                <VBox fx:id="recentProjectsList" spacing="8" />
+            </VBox>
+        </HBox>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_LEFT" spacing="12" styleClass="welcome-footer">
+            <Label text="Where circuits come alive" styleClass="welcome-footer-motto" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Label text="Ctrl+N  Schematic" styleClass="welcome-shortcut" />
+            <Label text="Ctrl+Shift+N  Breadboard" styleClass="welcome-shortcut" />
+            <Label text="Ctrl+O  Open" styleClass="welcome-shortcut" />
+            <Button fx:id="exitButton" text="Exit" onAction="#handleExit"
+                    styleClass="welcome-exit-button" />
+        </HBox>
+    </bottom>
+</BorderPane>

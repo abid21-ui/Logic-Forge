@@ -191,7 +191,7 @@ The scripts check the Maven build and test process using the project configurati
 
 A project demonstration video will be added here:
 
-> **YouTube:** link to be added
+> **YouTube:** link be added
 
 ## License and academic use
 

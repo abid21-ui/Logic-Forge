@@ -30,7 +30,10 @@ public final class BreadboardDemos {
         demo.connectPins(xor, 3, xor, 4);
         demo.connectPins(and, 3, or, 1);
         demo.connectPins(and, 6, or, 2);
-        demo.distributeOutput(xor, 6, 28, and, 4, demo.layout.bulbHoleId(0));
+        // The first XOR output feeds both the second XOR input and the
+        // carry-term AND gate.  The second XOR output is the sum output.
+        demo.distributeToTarget(xor, 3, 28, and, 4);
+        demo.connectPinToHole(xor, 6, demo.layout.bulbHoleId(0));
         demo.connectPinToHole(or, 3, demo.layout.bulbHoleId(1));
         return demo.finish();
     }
@@ -171,6 +174,17 @@ public final class BreadboardDemos {
             connect(freeSocketForPin(source, sourcePin), rowPrefix + "3");
             connect(rowPrefix + "4", freeSocketForPin(target, targetPin));
             connect(rowPrefix + "5", extraHoleId);
+        }
+
+        private void distributeToTarget(
+                PlacedIc source,
+                int sourcePin,
+                int distributionRow,
+                PlacedIc target,
+                int targetPin) {
+            String rowPrefix = "M0R" + distributionRow + "C";
+            connect(freeSocketForPin(source, sourcePin), rowPrefix + "3");
+            connect(rowPrefix + "4", freeSocketForPin(target, targetPin));
         }
 
         private void connectHoleToPin(String holeId, PlacedIc ic, int physicalPin) {

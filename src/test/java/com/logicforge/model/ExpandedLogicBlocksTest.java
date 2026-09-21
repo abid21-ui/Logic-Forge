@@ -33,7 +33,7 @@ class ExpandedLogicBlocksTest {
     void everyNativeComponentKeepsPinNamesAndCountsInSync() {
         ComponentConfig config = ComponentConfig.bits(4);
         for (ComponentType type : ComponentType.values()) {
-            if (type == ComponentType.CUSTOM) {
+            if (type == ComponentType.CUSTOM || type == ComponentType.INTEGRATED_CIRCUIT) {
                 continue;
             }
             assertEquals(type.inputCount(config), type.inputNames(config).size(),

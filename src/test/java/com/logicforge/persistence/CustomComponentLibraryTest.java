@@ -48,8 +48,9 @@ class CustomComponentLibraryTest {
     void opensDefinitionsSavedBeforeDescriptionsWereAdded() {
         CustomComponentDefinition definition = inverterBlock();
         String json = LogicForgeFileCodec.customComponentLibraryToJson(List.of(definition));
-        String legacyJson = json.replace(
-                "\"description\": \"Outputs the complement of its input.\",", "");
+        // Simulate an old file regardless of the formatter's whitespace.
+        String legacyJson = json.replaceAll(
+                "(?m)\\s*\"description\"\\s*:\\s*\"Outputs the complement of its input\\.\",?", "");
 
         CustomComponentDefinition restored =
                 LogicForgeFileCodec.customComponentLibraryFromJson(legacyJson).get(0);
